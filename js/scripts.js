@@ -5,52 +5,60 @@ var consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q
 
 var translate = function(english) {
   english = english.toLowerCase();
-  var englishArray = english.split("");
-  var wordConsonants = [];
-  var nonLetters = [];
+  var sentenceArray = english.split(" ");
+  var pigLatinTranslated = [];
 
-  for (i = 0; i < englishArray.length; i++) {
-    if (!vowels.includes(englishArray[i]) &&  !consonants.includes(englishArray[i])) {
-      nonLetters.push(englishArray[i]);
+  for (j = 0; j < sentenceArray.length; j++) {
+    var wordArray = sentenceArray[j].split("");
+    var wordConsonants = [];
+    var nonLetters = [];
+    console.log(wordArray);
+
+    for (i = 0; i < wordArray.length; i++) {
+      if (!vowels.includes(wordArray[i]) &&  !consonants.includes(wordArray[i])) {
+        nonLetters.push(wordArray[i]);
+        console.log(nonLetters);
+      } else {
+        console.log(wordArray);
+      }
     }
-  }
 
-  for (i = englishArray.length; i >= 0; i--) {
-    if (nonLetters.includes(englishArray[i])) {
-      englishArray.splice(i, 1);
+    for (i = wordArray.length; i >= 0; i--) {
+      if (nonLetters.includes(wordArray[i])) {
+        wordArray.splice(i, 1);
+      } else {
+      }
+    }
+
+    for (i = 0; i < wordArray.length; i++) {
+      if (consonants.includes(wordArray[i])) {
+        wordConsonants.push(wordArray[i]);
+      } else if (wordArray[i] === "u" && wordArray[i - 1] === "q") {
+        wordConsonants.push(wordArray[i]);
+      } else {
+        break;
+      }
+    }
+
+    if (vowels.includes(wordArray[0])) {
+      pigLatin = wordArray.join("") + "way";
+    } else if (wordConsonants && consonants.includes(wordArray[0])) {
+      wordArray = wordArray.concat(wordConsonants);
+      wordArray.splice(0, wordConsonants.length);
+      pigLatin = wordArray.join("") + "ay";
     } else {
+      pigLatin = nonLetters.join('');
     }
+    pigLatinTranslated.push(pigLatin);
   }
-
-  for (i = 0; i < englishArray.length; i++) {
-    if (consonants.includes(englishArray[i])) {
-      wordConsonants.push(englishArray[i]);
-    } else if (englishArray[i] === "u" && englishArray[i - 1] === "q") {
-      wordConsonants.push(englishArray[i]);
-    } else {
-      break;
-    }
-  }
-
-  if (vowels.includes(englishArray[0])) {
-    pigLatin = englishArray.join("");
-    return pigLatin + "way";
-  } else if (wordConsonants && consonants.includes(englishArray[0])) {
-    englishArray = englishArray.concat(wordConsonants);
-    englishArray.splice(0, wordConsonants.length);
-    pigLatin = englishArray.join("");
-    return pigLatin + "ay";
-  } else {
-    return english;
-  }
+  return pigLatinTranslated.join(' ');
 }
 
-
-  $(document).ready(function() {
-    $("form#english").submit(function(event) {
-      event.preventDefault();
-      var input = $("#inputText").val();
-      var output = translate(input);
-      $("#translated").text(output);
-    });
+$(document).ready(function() {
+  $("form#english").submit(function(event) {
+    event.preventDefault();
+    var input = $("#inputText").val();
+    var output = translate(input);
+    $("#translated").text(output);
   });
+});
