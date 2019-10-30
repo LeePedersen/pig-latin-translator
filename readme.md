@@ -30,11 +30,11 @@ x For words beginning with one or more consonants, move all of the first consecu
 exI: chatter
 exO: atterchay
 
-If the first consonants start with "qu", move the "u" along with the "q".
+x If the first consonants start with "qu", move the "u" along with the "q".
 exI: queer
 exO: eerquay
 
-If the first consonants include "qu", move the "u" along with the "q".
+x If the first consonants include "qu", move the "u" along with the "q".
 exI: squeal
 exO: ealsquay
 
@@ -54,4 +54,4 @@ The program makes sure y works as vowel when following consonants.
 exI: why
 exO: ywhay
 
-if extra time: make thing with numbers more elegant
+if extra time: make thing with numbers more elegant!!!
