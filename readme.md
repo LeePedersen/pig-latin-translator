@@ -26,7 +26,7 @@ x For words beginning with "y", treat "y" as a consonant.
 exI: year
 exO: earyay
 
-For words beginning with one or more consonants, move all of the first consecutive consonants to the end, and add "ay".
+x For words beginning with one or more consonants, move all of the first consecutive consonants to the end, and add "ay".
 exI: chatter
 exO: atterchay
 
@@ -53,3 +53,5 @@ exO: Ethay atcay unsray
 The program makes sure y works as vowel when following consonants.
 exI: why
 exO: ywhay
+
+if extra time: make thing with numbers more elegant
